@@ -406,8 +406,8 @@ function render(): void {
       : `${header()}<p class="muted">Loading…</p>`
     return
   }
-  // A filter left on a host Orca no longer knows shows everything again.
-  if (hostFilter && !snap.hosts.some((h) => h.id === hostFilter)) hostFilter = null
+  // A filter left on a host that is no longer offered shows everything again.
+  if (hostFilter && !hostChips(snap).some((h) => h.id === hostFilter)) hostFilter = null
   const scoped = onHost(snap, hostFilter)
   const view = buildView(scoped, seen)
   const alerts = [

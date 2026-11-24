@@ -2,7 +2,7 @@
   "manifestVersion": 2,
   "id": "pit-wall-fleet",
   "name": "Pit Wall Fleet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read-only panel: who is waiting on you and who is working, on this computer, on SSH machines and on paired Orca servers.",
   "engines": {
     "orca": ">=1.4.259"

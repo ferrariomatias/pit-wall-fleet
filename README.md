@@ -13,7 +13,7 @@ Panel lateral de solo lectura para [Orca](https://github.com/stablyai/orca). Es 
 | Worktrees por SSH | Aparecen, pero sin decir en qué máquina están | Marcados con el nombre de la máquina |
 | Servidores Orca emparejados (`orca environment add`) | No aparecen | Aparecen, con sus sesiones, PRs y checks |
 | Mismo proyecto en dos máquinas | Se mezcla en un solo grupo | Un grupo por máquina |
-| Filtro por host | — | Una ficha por host; la elección se recuerda |
+| Filtro por host | — | Una ficha para esta máquina, cada servidor emparejado y cada máquina SSH que tenga worktrees; la elección se recuerda |
 | Host caído | — | Aviso: "No answer from …" y SSH sin conectar |
 
 ## Cómo funciona

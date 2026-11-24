@@ -20,10 +20,14 @@ export function onHost(snap: Snapshot, hostId: string | null): Snapshot {
   }
 }
 
-/** The hosts to offer as a filter: none while this computer is the only one Orca knows. */
+/**
+ * The hosts to offer as a filter: this computer and the paired Orca servers. An SSH target is
+ * offered only while it has a workspace: Orca also lists every alias of ~/.ssh/config, and most
+ * of those never run an agent. None are offered while this computer is the only one left.
+ */
 export function hostChips(snap: Snapshot): HostStatus[] {
-  const remote = snap.hosts.some((h) => h.kind !== 'local')
-  return remote ? snap.hosts : []
+  const shown = snap.hosts.filter((h) => h.kind !== 'ssh' || h.worktrees > 0)
+  return shown.some((h) => h.kind !== 'local') ? shown : []
 }
 
 /** Where a host is shown beside a name: nothing for this computer. */

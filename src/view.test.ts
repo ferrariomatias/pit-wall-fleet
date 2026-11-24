@@ -130,3 +130,13 @@ test('the host filter is offered only when Orca knows another host', () => {
   assert.deepEqual(hostChips(sampleSnapshot(NOW)), [])
   assert.deepEqual(hostChips(fleetSnapshot()).map((h) => h.label), ['This computer', 'work-laptop'])
 })
+
+test('SSH targets with no workspace are left out of the host filter', () => {
+  const snap = fleetSnapshot()
+  const ssh = (id: string, worktrees: number) =>
+    ({ id: `ssh:${id}`, kind: 'ssh', label: id, state: 'ok', error: null, worktrees, waiting: 0, working: 0 }) as const
+  const hosts = [...snap.hosts, ssh('unused-alias', 0), ssh('vps', 2)]
+  assert.deepEqual(hostChips({ ...snap, hosts }).map((h) => h.label), ['This computer', 'work-laptop', 'vps'])
+  // Only unused SSH aliases besides this computer: nothing to choose between.
+  assert.deepEqual(hostChips({ ...snap, hosts: [snap.hosts[0], ssh('unused-alias', 0)] }), [])
+})
